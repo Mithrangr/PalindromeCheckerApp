@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import java.util.Stack;
+import java.util.Queue;
+import java.util.LinkedList;
 
 public class PalindromeCheckerApp {
 
@@ -11,20 +13,24 @@ public class PalindromeCheckerApp {
         String word = sc.nextLine();
 
         Stack<Character> stack = new Stack<>();
+        Queue<Character> queue = new LinkedList<>();
 
-        // Push characters into stack
+        // Push to stack and enqueue to queue
         for(int i = 0; i < word.length(); i++) {
-            stack.push(word.charAt(i));
+            char ch = word.charAt(i);
+            stack.push(ch);
+            queue.add(ch);
         }
 
         boolean isPalindrome = true;
 
-        // Pop and compare
+        // Compare pop (stack) and dequeue (queue)
         for(int i = 0; i < word.length(); i++) {
 
-            char popped = stack.pop();
+            char fromStack = stack.pop();
+            char fromQueue = queue.remove();
 
-            if(word.charAt(i) != popped) {
+            if(fromStack != fromQueue) {
                 isPalindrome = false;
                 break;
             }
